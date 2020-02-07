@@ -63,11 +63,11 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite naziv:");
             string addNaziv = IOPomocnaKlasa.OcitajTekst();
 
-            Console.Write("Unesite pocetak ispitnog roka(yyyy/MM/dd):");
-            DateTime.TryParse(Console.ReadLine(), out addPocetak);
+            Console.Write("Unesite pocetak ispitnog roka:");
+            addPocetak = IOPomocnaKlasa.ProveraVremena();
 
-            Console.Write("Unesite kraj ispitnog roka(yyyy/MM/dd):");
-            DateTime.TryParse(Console.ReadLine(), out addKraj);
+            Console.Write("Unesite kraj ispitnog roka:");
+            addKraj = IOPomocnaKlasa.ProveraVremena();
 
             IspitniRok addIspitniRok = new IspitniRok { ID = addID, Naziv = addNaziv, Pocetak = addPocetak, Kraj = addKraj };
             listaIspitnihRokova.Add(addIspitniRok);
@@ -97,7 +97,7 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite novi kraj:(yyyy,MM,dd):");
             newKraj = IOPomocnaKlasa.ProveraVremena();
 
-            IspitniRok izmenaIspitnogRoka = new IspitniRok {ID = newID,Naziv = newNaziv,Pocetak = newPocetak,Kraj = newKraj};
+            IspitniRok izmenaIspitnogRoka = new IspitniRok { ID = newID, Naziv = newNaziv, Pocetak = newPocetak, Kraj = newKraj };
 
             IspitniRok FindIspitniRok = listaIspitnihRokova.Where(x => x.ID == edit).FirstOrDefault();
             listaIspitnihRokova[edit] = izmenaIspitnogRoka;
@@ -166,4 +166,3 @@ namespace Termin4Primer7.UI
 
     }
 }
- 

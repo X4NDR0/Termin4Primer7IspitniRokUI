@@ -122,9 +122,11 @@ namespace Modul1Termin04.Primer7.Utils
         public static DateTime ProveraVremena()
         {
             DateTime vreme = new DateTime();
-            while (DateTime.TryParse(Console.ReadLine(),out vreme))
+            while (vreme == DateTime.MinValue)
             {
-                Console.WriteLine("Greska,pokusajte ponovo:");
+                Console.WriteLine("Unesite datum u formatu : (yyyy/MM/dd):");
+                DateTime.TryParse(Console.ReadLine(), out vreme);
+               
             }
             return vreme;
         }
