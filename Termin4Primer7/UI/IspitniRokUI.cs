@@ -13,11 +13,10 @@ namespace Termin4Primer7.UI
         public static List<IspitniRok> listaIspitnihRokova = new List<IspitniRok>();
         public static void IspisiMenuText()
         {
-            Console.WriteLine("1. Dodaj ispitni rok");
+            Console.WriteLine("1.Dodaj ispitni rok");
             Console.WriteLine("2.Izmeni ispitni rok");
             Console.WriteLine("3.Ispisi sve ispitne rokove");
             Console.WriteLine("4.Ispisi odredjeni ispitni rok");
-            Console.WriteLine("0.Vrati se u glavni meni");
             Console.Write("Opcija:");
         }
         public static void MeniIspitniRok()

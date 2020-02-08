@@ -124,9 +124,8 @@ namespace Modul1Termin04.Primer7.Utils
             DateTime vreme = new DateTime();
             while (vreme == DateTime.MinValue)
             {
-                Console.WriteLine("Unesite datum u formatu : (yyyy/MM/dd):");
                 DateTime.TryParse(Console.ReadLine(), out vreme);
-               
+                Console.Write("Unesite datum u formatu : (yyyy/MM/dd):");
             }
             return vreme;
         }

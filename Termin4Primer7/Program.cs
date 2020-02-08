@@ -4,13 +4,15 @@ using Termin4Primer7.UI;
 
 namespace Termin4Primer7
 {
-    class Program
+    class Programs
     {
         private static readonly string IsprDat = "ispitni_rokovi.csv";
+        private static readonly string NastavnikDat = "nastavnici.csv";
         private static char sep = Path.DirectorySeparatorChar;
-        private static string putanjaDataDirRelease = "C:\\Users\\XANDRO\\source\\repos\\Termin4Primer7\\Termin4Primer7\\bin\\Debug\\netcoreapp3.1\\";
+        private static string putanjaDataDirRelease = Directory.GetCurrentDirectory() + "\\";
         static void Main(string[] args)
         {
+            Console.WriteLine(putanjaDataDirRelease);
             IspitniRokUI.UcitajIspitneRokoveIzDatoteke(putanjaDataDirRelease + IsprDat);
             IspitniRokUI.MeniIspitniRok();
         }
