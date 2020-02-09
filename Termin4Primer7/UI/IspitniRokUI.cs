@@ -100,6 +100,8 @@ namespace Termin4Primer7.UI
 
             IspitniRok FindIspitniRok = listaIspitnihRokova.Where(x => x.ID == edit).FirstOrDefault();
             listaIspitnihRokova[edit] = izmenaIspitnogRoka;
+
+            SacuvajIspitneRokoveUDatoteku("ispitni_rokovi.cvs");
         }
 
         public static void IspisiSveIspitneRokove()
@@ -127,7 +129,7 @@ namespace Termin4Primer7.UI
 
         public static void UcitajIspitneRokoveIzDatoteke(string fileName)
         {
-            string line = "";
+            string line = Directory.GetCurrentDirectory();
             if (File.Exists(fileName))
             {
                 using (StreamReader citac = File.OpenText(fileName))

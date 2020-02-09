@@ -9,12 +9,12 @@ namespace Termin4Primer7
         private static readonly string IsprDat = "ispitni_rokovi.csv";
         private static readonly string NastavnikDat = "nastavnici.csv";
         private static char sep = Path.DirectorySeparatorChar;
-        private static string putanjaDataDirRelease = Directory.GetCurrentDirectory() + "\\";
+        private static string putanjaDataDirRelease = "data";
         static void Main(string[] args)
         {
-            Console.WriteLine(putanjaDataDirRelease);
-            IspitniRokUI.UcitajIspitneRokoveIzDatoteke(putanjaDataDirRelease + IsprDat);
+            IspitniRokUI.UcitajIspitneRokoveIzDatoteke(putanjaDataDirRelease + sep + IsprDat);
             IspitniRokUI.MeniIspitniRok();
+            IspitniRokUI.SacuvajIspitneRokoveUDatoteku(putanjaDataDirRelease + sep + IsprDat);
         }
     }
 }
