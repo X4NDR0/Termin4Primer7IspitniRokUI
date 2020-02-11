@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using Termin4Primer7.UI;
 
 namespace Termin4Primer7
@@ -14,7 +15,6 @@ namespace Termin4Primer7
         {
             IspitniRokUI.UcitajIspitneRokoveIzDatoteke(putanjaDataDirRelease + sep + IsprDat);
             IspitniRokUI.MeniIspitniRok();
-            IspitniRokUI.SacuvajIspitneRokoveUDatoteku(putanjaDataDirRelease + sep + IsprDat);
         }
     }
 }

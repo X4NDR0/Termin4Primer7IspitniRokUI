@@ -99,9 +99,13 @@ namespace Termin4Primer7.UI
             IspitniRok izmenaIspitnogRoka = new IspitniRok { ID = newID, Naziv = newNaziv, Pocetak = newPocetak, Kraj = newKraj };
 
             IspitniRok FindIspitniRok = listaIspitnihRokova.Where(x => x.ID == edit).FirstOrDefault();
-            listaIspitnihRokova[edit] = izmenaIspitnogRoka;
 
-            SacuvajIspitneRokoveUDatoteku("ispitni_rokovi.cvs");
+            int index = listaIspitnihRokova.IndexOf(FindIspitniRok);
+
+            listaIspitnihRokova[index] = izmenaIspitnogRoka;
+
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            SacuvajIspitneRokoveUDatoteku(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
         }
 
         public static void IspisiSveIspitneRokove()
@@ -129,7 +133,7 @@ namespace Termin4Primer7.UI
 
         public static void UcitajIspitneRokoveIzDatoteke(string fileName)
         {
-            string line = Directory.GetCurrentDirectory();
+            string line = string.Empty;
             if (File.Exists(fileName))
             {
                 using (StreamReader citac = File.OpenText(fileName))
