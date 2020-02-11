@@ -11,6 +11,8 @@ namespace Termin4Primer7.UI
     class IspitniRokUI
     {
         public static List<IspitniRok> listaIspitnihRokova = new List<IspitniRok>();
+        string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+
         public static void IspisiMenuText()
         {
             Console.WriteLine("1.Dodaj ispitni rok");
@@ -71,6 +73,10 @@ namespace Termin4Primer7.UI
             IspitniRok addIspitniRok = new IspitniRok { ID = addID, Naziv = addNaziv, Pocetak = addPocetak, Kraj = addKraj };
             listaIspitnihRokova.Add(addIspitniRok);
 
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+
+            SacuvajIspitneRokoveUDatoteku(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
+
             Console.WriteLine("Ispitni rok je uspesno kreiran!");
         }
 
@@ -105,6 +111,7 @@ namespace Termin4Primer7.UI
             listaIspitnihRokova[index] = izmenaIspitnogRoka;
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+
             SacuvajIspitneRokoveUDatoteku(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
         }
 
