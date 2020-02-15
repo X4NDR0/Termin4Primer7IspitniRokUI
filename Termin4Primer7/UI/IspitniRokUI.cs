@@ -11,7 +11,6 @@ namespace Termin4Primer7.UI
     class IspitniRokUI
     {
         public static List<IspitniRok> listaIspitnihRokova = new List<IspitniRok>();
-        string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
 
         public static void IspisiMenuText()
         {

@@ -6,6 +6,11 @@ namespace Termin4Primer7.Model
 {
     class Nastavnik
     {
+        public Nastavnik()
+        {
+
+        }
+
         public Nastavnik(string data)
         {
             string[] nizPodataka = data.Split(',');
