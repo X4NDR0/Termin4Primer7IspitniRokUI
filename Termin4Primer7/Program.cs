@@ -13,6 +13,8 @@ namespace Termin4Primer7
         private static string putanjaDataDirRelease = "data";
         static void Main(string[] args)
         {
+            AplikacijaUI ap = new AplikacijaUI();
+            ap.Application();
             IspitniRokUI.UcitajIspitneRokoveIzDatoteke(putanjaDataDirRelease + sep + IsprDat);
             IspitniRokUI.MeniIspitniRok();
         }
