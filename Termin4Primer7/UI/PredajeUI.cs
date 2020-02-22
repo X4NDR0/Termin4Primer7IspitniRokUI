@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Modul1Termin04.Primer7.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Modul1Termin04.Primer7.Utils;
 using Termin4Primer7.Model;
 
 namespace Termin4Primer7.UI
 {
     class PredajeUI
     {
+
         public static List<Predaja> listaPredaja = new List<Predaja>();
 
         public static void TekstMenija()
@@ -24,6 +25,9 @@ namespace Termin4Primer7.UI
 
         public static void MeniPredaja()
         {
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(),@"..\..\..\"));
+            UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
+
             TekstMenija();
             int izabir = IOPomocnaKlasa.OcitajCeoBroj();
 
@@ -34,7 +38,7 @@ namespace Termin4Primer7.UI
                     break;
 
                 case 2:
-
+                    IzmeniPredaju();
                     break;
 
                 case 3:
@@ -63,9 +67,12 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Predaja predajaAdd = new Predaja { IDPredaje = idPredaje,IDProfesora= idProfesora};
+            Predaja predajaAdd = new Predaja { IDPredaje = idPredaje, IDProfesora = idProfesora };
 
             listaPredaja.Add(predajaAdd);
+
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
         }
 
         public static void IzmeniPredaju()
@@ -86,6 +93,9 @@ namespace Termin4Primer7.UI
             Predaja predajaEdit = new Predaja { IDPredaje = idPredaje, IDProfesora = idProfesora };
 
             listaPredaja[index] = predajaEdit;
+
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
         }
 
         public static void IspisiSvePredaje()

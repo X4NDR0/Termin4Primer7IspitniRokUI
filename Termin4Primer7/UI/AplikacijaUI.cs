@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Modul1Termin04.Primer7.Utils;
+﻿using Modul1Termin04.Primer7.Utils;
+using System;
 
 namespace Termin4Primer7.UI
 {
@@ -13,9 +11,11 @@ namespace Termin4Primer7.UI
             Console.WriteLine("2.Profesori");
             Console.WriteLine("3.Predaje");
             Console.WriteLine("0.Exit");
+            Console.Write("Opcije:");
         }
         public void Application()
         {
+            MeniTekst();
             int izabir;
 
             izabir = IOPomocnaKlasa.OcitajCeoBroj();
@@ -31,7 +31,7 @@ namespace Termin4Primer7.UI
                     break;
 
                 case 3:
-                    
+                    PredajeUI.MeniPredaja();
                     break;
 
                 case 0:

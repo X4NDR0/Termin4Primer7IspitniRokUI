@@ -18,7 +18,8 @@ namespace Termin4Primer7.Model
             if (nizPodataka.Length != 4)
             {
                 Console.WriteLine("Error while file reading!");
-            }else
+            }
+            else
             {
                 ID = Convert.ToInt32(nizPodataka[0]);
                 Ime = nizPodataka[1];
