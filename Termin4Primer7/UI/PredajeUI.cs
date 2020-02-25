@@ -25,7 +25,7 @@ namespace Termin4Primer7.UI
 
         public static void MeniPredaja()
         {
-            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(),@"..\..\..\"));
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
 
             TekstMenija();
