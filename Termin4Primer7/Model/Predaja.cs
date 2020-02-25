@@ -25,7 +25,7 @@ namespace Termin4Primer7.Model
 
         public string ToFileString()
         {
-            string data = IDPredaje + " " + IDProfesora;
+            string data = IDPredaje + "," + IDProfesora;
             return data;
         }
 
