@@ -28,35 +28,40 @@ namespace Termin4Primer7.UI
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
 
-            TekstMenija();
-            int izabir = IOPomocnaKlasa.OcitajCeoBroj();
+            int izabir;
 
-            switch (izabir)
+            do
             {
-                case 1:
-                    DodajPredaju();
-                    break;
+                TekstMenija();
+                izabir = IOPomocnaKlasa.OcitajCeoBroj();
 
-                case 2:
-                    IzmeniPredaju();
-                    break;
+                switch (izabir)
+                {
+                    case 1:
+                        DodajPredaju();
+                        break;
 
-                case 3:
-                    IspisiSvePredaje();
-                    break;
+                    case 2:
+                        IzmeniPredaju();
+                        break;
 
-                case 4:
-                    IspisiOdredjenuPredaju();
-                    break;
+                    case 3:
+                        IspisiSvePredaje();
+                        break;
 
-                case 0:
-                    Environment.Exit(0);
-                    break;
+                    case 4:
+                        IspisiOdredjenuPredaju();
+                        break;
 
-                default:
-                    Console.WriteLine("Izabrana opcija ne postoji!");
-                    break;
-            }
+                    case 0:
+                        Environment.Exit(0);
+                        break;
+
+                    default:
+                        Console.WriteLine("Izabrana opcija ne postoji!");
+                        break;
+                }
+            } while (izabir != 0);
         }
 
         public static void DodajPredaju()

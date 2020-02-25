@@ -23,6 +23,9 @@ namespace Termin4Primer7.UI
         }
         public static void MeniIspitniRok()
         {
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            UcitajIspitneRokoveIzDatoteke(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
+
             int select;
             do
             {

@@ -11,7 +11,7 @@ namespace Termin4Primer7.UI
     class NastavnikUI
     {
         public static List<Nastavnik> listaProfesora = new List<Nastavnik>();
-        public void IspisiTextMenija()
+        public static void IspisiTextMenija()
         {
             Console.WriteLine("1.Dodaj profesora");
             Console.WriteLine("2.Izmeni profesora");
@@ -20,36 +20,43 @@ namespace Termin4Primer7.UI
         }
         public static void MeniProfesora()
         {
+            string destinacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            UcitajPodatke(destinacija + "data" + "\\" + "nastavnici.csv");
+
+
             int izabir;
 
-            izabir = Convert.ToInt32(Console.ReadLine());
-
-            switch (izabir)
+            do
             {
-                case 1:
-                    DodajProfesora();
-                    break;
+                IspisiTextMenija();
+                izabir = Convert.ToInt32(Console.ReadLine());
+                switch (izabir)
+                {
+                    case 1:
+                        DodajProfesora();
+                        break;
 
-                case 2:
-                    IzmeniProfesora();
-                    break;
+                    case 2:
+                        IzmeniProfesora();
+                        break;
 
-                case 3:
-                    IspisiSveProfesore();
-                    break;
+                    case 3:
+                        IspisiSveProfesore();
+                        break;
 
-                case 4:
-                    IspisiOdredjenogProfesora();
-                    break;
+                    case 4:
+                        IspisiOdredjenogProfesora();
+                        break;
 
-                case 0:
-                    Environment.Exit(0);
-                    break;
+                    case 0:
+                        Environment.Exit(0);
+                        break;
 
-                default:
-                    Console.WriteLine("Opcija ne postoji!");
-                    break;
-            }
+                    default:
+                        Console.WriteLine("Opcija ne postoji!");
+                        break;
+                }
+            } while (izabir != 0);
         }
 
         public static void DodajProfesora()
@@ -69,6 +76,9 @@ namespace Termin4Primer7.UI
             Nastavnik addNastavnik = new Nastavnik { ID = addID, Ime = addName, Prezime = addLastName, Posao = addPosao };
 
             listaProfesora.Add(addNastavnik);
+
+            string destinacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            SacuvajPodatke(destinacija + "data" + "\\" + "nastavnici.csv");
 
             Console.WriteLine("Profesor je uspesno dodat u bazu podataka!");
         }
@@ -95,6 +105,9 @@ namespace Termin4Primer7.UI
             Nastavnik checkIndex = listaProfesora.Where(x => x.ID == editID).FirstOrDefault();
 
             int index = listaProfesora.IndexOf(checkIndex);
+
+            string destinacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            SacuvajPodatke(destinacija + "data" + "nastavnici.csv");
 
             listaProfesora[index] = editNastavnik;
         }
