@@ -17,13 +17,11 @@ namespace Termin4Primer7.UI
             Console.WriteLine("2.Izmeni profesora");
             Console.WriteLine("3.Ispisi sve profesore");
             Console.WriteLine("4.Ispisi odredjenog profesora");
+            Console.WriteLine("0.Nazad");
+            Console.Write("Opcija:");
         }
         public static void MeniProfesora()
         {
-            string destinacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
-            UcitajPodatke(destinacija + "data" + "\\" + "nastavnici.csv");
-
-
             int izabir;
 
             do
@@ -49,7 +47,7 @@ namespace Termin4Primer7.UI
                         break;
 
                     case 0:
-                        Environment.Exit(0);
+
                         break;
 
                     default:

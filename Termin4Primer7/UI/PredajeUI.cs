@@ -10,7 +10,6 @@ namespace Termin4Primer7.UI
 {
     class PredajeUI
     {
-
         public static List<Predaja> listaPredaja = new List<Predaja>();
 
         public static void TekstMenija()
@@ -19,14 +18,13 @@ namespace Termin4Primer7.UI
             Console.WriteLine("2.Izmeni predaju");
             Console.WriteLine("3.Ispisi sve predaje");
             Console.WriteLine("4.Ispisi odredjenu predaju");
-            Console.WriteLine("0.Exit");
+            Console.WriteLine("0.Nazad");
             Console.Write("Opcija:");
         }
 
         public static void MeniPredaja()
         {
-            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
-            UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
+
 
             int izabir;
 
@@ -54,11 +52,11 @@ namespace Termin4Primer7.UI
                         break;
 
                     case 0:
-                        Environment.Exit(0);
+
                         break;
 
                     default:
-                        Console.WriteLine("Izabrana opcija ne postoji!");
+
                         break;
                 }
             } while (izabir != 0);
@@ -107,7 +105,10 @@ namespace Termin4Primer7.UI
         {
             foreach (Predaja predaja in listaPredaja)
             {
-                Console.WriteLine("ID Profesora:" + predaja.IDProfesora + "        " + "ID Predaje:" + predaja.IDPredaje);
+                Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predaja.IDProfesora).FirstOrDefault();
+                Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predaja.IDPredaje).FirstOrDefault();
+
+                Console.WriteLine("Ime Profesora:" + FoundNastavnik.Ime + " Prezime profesora:" + FoundNastavnik.Prezime + " Predmet:" + FoundPredmet.Naziv);
             }
         }
 

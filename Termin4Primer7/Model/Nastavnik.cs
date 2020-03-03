@@ -28,7 +28,7 @@ namespace Termin4Primer7.Model
 
         public string ToFileString()
         {
-            string podaci = ID + " " + Ime + " " + Prezime + " " + Posao;
+            string podaci = ID + "," + Ime + "," + Prezime + "," + Posao;
             return podaci;
         }
 

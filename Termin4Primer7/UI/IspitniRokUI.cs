@@ -18,14 +18,11 @@ namespace Termin4Primer7.UI
             Console.WriteLine("2.Izmeni ispitni rok");
             Console.WriteLine("3.Ispisi sve ispitne rokove");
             Console.WriteLine("4.Ispisi odredjeni ispitni rok");
-            Console.WriteLine("0.Izlaz");
+            Console.WriteLine("0.Nazad");
             Console.Write("Opcija:");
         }
         public static void MeniIspitniRok()
         {
-            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
-            UcitajIspitneRokoveIzDatoteke(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
-
             int select;
             do
             {
@@ -50,11 +47,11 @@ namespace Termin4Primer7.UI
                         break;
 
                     case 0:
-                        Environment.Exit(0);
+
                         break;
 
                     default:
-                        Console.WriteLine("Izabrana opcija ne postoji!");
+
                         break;
                 }
             } while (select != 0);
