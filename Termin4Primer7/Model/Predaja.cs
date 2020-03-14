@@ -19,17 +19,17 @@ namespace Termin4Primer7.Model
             else
             {
                 IDProfesora = Convert.ToInt32(nizPodataka[0]);
-                IDPredaje = Convert.ToInt32(nizPodataka[1]);
+                IDPredmeta = Convert.ToInt32(nizPodataka[1]);
             }
         }
 
         public string ToFileString()
         {
-            string data = IDPredaje + "," + IDProfesora;
+            string data = IDPredmeta + "," + IDProfesora;
             return data;
         }
 
         public int IDProfesora;
-        public int IDPredaje;
+        public int IDPredmeta;
     }
 }

@@ -64,13 +64,35 @@ namespace Termin4Primer7.UI
 
         public static void DodajPredaju()
         {
-            Console.Write("Unesite ID predaje:");
-            int idPredaje = IOPomocnaKlasa.OcitajCeoBroj();
+            PredmetUI.IspisiSvePredmete();
+            Console.Write("Unesite ID predmeta:");
+            int IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
 
+            bool predmetProvera = ProveriIDPredmeta(IDPredmeta);
+
+            if (!predmetProvera)
+            {
+                Console.WriteLine("Taj id ne postoji!");
+                return;
+            }
+
+
+            NastavnikUI.IspisiSveProfesore();
             Console.Write("Unesite ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Predaja predajaAdd = new Predaja { IDPredaje = idPredaje, IDProfesora = idProfesora };
+            bool profesorProvera = ProveriIDProfesora(idProfesora);
+
+            if (!profesorProvera)
+            {
+                Console.WriteLine("Taj id ne postoji!");
+                return;
+            }
+
+
+            ProveriIDProfesora(idProfesora);
+
+            Predaja predajaAdd = new Predaja { IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
             listaPredaja.Add(predajaAdd);
 
@@ -81,19 +103,19 @@ namespace Termin4Primer7.UI
         public static void IzmeniPredaju()
         {
             Console.Write("Unesite ID predaje koju zelite da izmenite:");
-            int idPredaje = IOPomocnaKlasa.OcitajCeoBroj();
+            int IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
 
             Console.Write("Unesite novi ID predaje:");
-            int idPredajeEdit = IOPomocnaKlasa.OcitajCeoBroj();
+            int IDPredmetaEdit = IOPomocnaKlasa.OcitajCeoBroj();
 
             Console.Write("Unesite novi ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Predaja FindObject = listaPredaja.Where(b => b.IDPredaje == idPredaje).FirstOrDefault();
+            Predaja FindObject = listaPredaja.Where(b => b.IDPredmeta == IDPredmeta).FirstOrDefault();
 
             int index = listaPredaja.IndexOf(FindObject);
 
-            Predaja predajaEdit = new Predaja { IDPredaje = idPredaje, IDProfesora = idProfesora };
+            Predaja predajaEdit = new Predaja { IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
             listaPredaja[index] = predajaEdit;
 
@@ -106,7 +128,7 @@ namespace Termin4Primer7.UI
             foreach (Predaja predaja in listaPredaja)
             {
                 Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predaja.IDProfesora).FirstOrDefault();
-                Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predaja.IDPredaje).FirstOrDefault();
+                Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predaja.IDPredmeta).FirstOrDefault();
 
                 Console.WriteLine("Ime Profesora:" + FoundNastavnik.Ime + " Prezime profesora:" + FoundNastavnik.Prezime + " Predmet:" + FoundPredmet.Naziv);
             }
@@ -114,17 +136,17 @@ namespace Termin4Primer7.UI
 
         public static void IspisiOdredjenuPredaju()
         {
-            int idPredaje;
+            int IDPredmeta;
 
             Console.Write("Unesite ID predaje:");
 
-            idPredaje = IOPomocnaKlasa.OcitajCeoBroj();
+            IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
 
             foreach (Predaja predaja in listaPredaja)
             {
-                if (idPredaje == predaja.IDPredaje)
+                if (IDPredmeta == predaja.IDPredmeta)
                 {
-                    Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredaje + " predaje profesor pod ID-om:" + predaja.IDProfesora);
+                    Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
                 }
             }
         }
@@ -167,5 +189,30 @@ namespace Termin4Primer7.UI
             }
         }
 
+        public static bool ProveriIDPredmeta(int idPredmeta)
+        {
+            foreach (Predmet predmet in PredmetUI.listaPredmeta)
+            {
+                if (predmet.ID == idPredmeta)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool ProveriIDProfesora(int idProfesora)
+        {
+            foreach (Nastavnik nastavnik in NastavnikUI.listaProfesora)
+            {
+                if (nastavnik.ID == idProfesora)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
+
