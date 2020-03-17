@@ -46,15 +46,13 @@ namespace Termin4Primer7.UI
                         break;
 
                     case 4:
-                        IspisiOdredjenuPredaju();
+                        IspisiOdredjenoPredavanje();
                         break;
 
                     case 0:
-
                         break;
 
                     default:
-
                         break;
                 }
             } while (izabir != 0);
@@ -62,7 +60,6 @@ namespace Termin4Primer7.UI
 
         public static void DodajPredavanje()
         {
-            IOPomocnaKlasa.IDPredavanja++;
             PredmetUI.IspisiSvePredmete();
 
             Console.Write("Unesite ID predmeta:");
@@ -76,7 +73,6 @@ namespace Termin4Primer7.UI
                 return;
             }
 
-
             NastavnikUI.IspisiSveProfesore();
             Console.Write("Unesite ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
@@ -89,7 +85,10 @@ namespace Termin4Primer7.UI
                 return;
             }
 
-            Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
+            //dodato ID = IOPomocnaKlasa.IDPredavanja++ . To znachi, ako je trenutno IdPredavanje = 1, on ce upisati vrednost 1, posle toga ce dici vrednost na 2. Za sledece
+            // predavanje ce taj broj biti 2 itd..
+
+            Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
             listaPredavanja.Add(predajaAdd);
 
@@ -99,14 +98,18 @@ namespace Termin4Primer7.UI
 
         public static void IzmeniPredavanje()
         {
-            Console.Write("Unesite ID predavanja kojeg zelite da izmenite:");
-            int IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
+            //dodato, IspisiSvaPredavanja , zato sto , kako moze da se izmeni predavanje, ako se ni ne zna ID.
 
-            bool provera = ProveriIDPredmeta(IDPredmeta);
+            IspisiSvaPredavanja();
+
+            Console.Write("Unesite ID predavanja kojeg zelite da izmenite:");
+            int IDPredavanja = IOPomocnaKlasa.OcitajCeoBroj();
+
+            bool provera = ProveriIDPredavanja(IDPredavanja);
 
             if (!provera)
             {
-                Console.WriteLine("Taj ID ne postoji!");
+                Console.WriteLine("To predavanje ne postoji!");
                 return;
             }
 
@@ -116,7 +119,7 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite novi ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Predavanje FindObject = listaPredavanja.Where(b => b.IDPredmeta == IDPredmeta).FirstOrDefault();
+            Predavanje FindObject = listaPredavanja.Where(b => b.IDPredmeta == IDPredavanja).FirstOrDefault();
 
             int index = listaPredavanja.IndexOf(FindObject);
 
@@ -135,11 +138,13 @@ namespace Termin4Primer7.UI
                 Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predavanje.IDProfesora).FirstOrDefault();
                 Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predavanje.IDPredmeta).FirstOrDefault();
 
-                Console.WriteLine("Ime Profesora:" + FoundNastavnik.Ime + " Prezime profesora:" + FoundNastavnik.Prezime + " Predmet:" + FoundPredmet.Naziv);
+                //dodato tekst polje Id predavanja, da bi omogucilo korisniku da vidi id, koji bi trebao da edituje.
+
+                Console.WriteLine("Id Predavanja: " + predavanje.ID + " Ime Profesora:" + FoundNastavnik.Ime + " Prezime profesora:" + FoundNastavnik.Prezime + " Predmet:" + FoundPredmet.Naziv);
             }
         }
 
-        public static void IspisiOdredjenuPredaju()
+        public static void IspisiOdredjenoPredavanje()
         {
             int IDPredavanja;
 
@@ -192,6 +197,20 @@ namespace Termin4Primer7.UI
             {
                 Console.WriteLine("Greska,datoteka ne postoji!!");
             }
+        }
+
+        //dodata metoda ProveriIDPrevanja
+
+        public static bool ProveriIDPredavanja(int idPredavanja)
+        {
+            foreach (Predavanje predavanje in listaPredavanja)
+            {
+                if (predavanje.ID == idPredavanja)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool ProveriIDPredmeta(int idPredmeta)
