@@ -24,15 +24,15 @@ namespace Modul1Termin04.Primer7.Model
             }
         }
 
+        public int ID { get; set; }
+        public string Naziv;
+        public DateTime Pocetak;
+        public DateTime Kraj;
+
         public string ToFileString()
         {
             string podaci = ID + "," + Naziv + "," + Pocetak.ToString("yyyy/MM/dd") + "," + Kraj.ToString("yyyy/MM/dd");
             return podaci;
         }
-
-        public int ID { get; set; }
-        public string Naziv;
-        public DateTime Pocetak;
-        public DateTime Kraj;
     }
 }

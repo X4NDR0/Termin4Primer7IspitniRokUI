@@ -4,6 +4,11 @@ namespace Modul1Termin04.Primer7.Utils
 {
     class IOPomocnaKlasa
     {
+        public static int IDispitnogRoka;
+        public static int IDProfesora;
+        public static int IDPredmeta;
+        public static int IDPredavanja;
+
         //čitanje promenljive string
         public static string OcitajTekst()
         {
@@ -124,10 +129,5 @@ namespace Modul1Termin04.Primer7.Utils
             }
             return vreme;
         }
-
-        public static int IDispitnogRoka;
-        public static int IDProfesora;
-        public static int IDPredmeta;
-        public static int IDPredavanja;
     }
 }

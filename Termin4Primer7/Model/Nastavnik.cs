@@ -26,15 +26,15 @@ namespace Termin4Primer7.Model
             }
         }
 
+        public int ID;
+        public string Ime;
+        public string Prezime;
+        public string Posao;
+
         public string ToFileString()
         {
             string podaci = ID + "," + Ime + "," + Prezime + "," + Posao;
             return podaci;
         }
-
-        public int ID;
-        public string Ime;
-        public string Prezime;
-        public string Posao;
     }
 }

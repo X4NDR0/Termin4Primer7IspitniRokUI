@@ -25,14 +25,14 @@ namespace Termin4Primer7.Model
             }
         }
 
+        public int ID;
+        public string Indeks;
+        public string Naziv;
+
         public string FileString()
         {
             string data = ID + "," + Indeks + "," + Naziv;
             return data;
         }
-
-        public int ID;
-        public string Indeks;
-        public string Naziv;
     }
 }

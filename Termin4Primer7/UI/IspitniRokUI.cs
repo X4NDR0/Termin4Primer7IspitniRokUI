@@ -59,6 +59,7 @@ namespace Termin4Primer7.UI
 
         public static void DodajIspitniRok()
         {
+            Console.Clear();
             IOPomocnaKlasa.IDispitnogRoka++;
             DateTime addPocetak;
             DateTime addKraj;
@@ -84,6 +85,7 @@ namespace Termin4Primer7.UI
 
         public static void IzmeniIspitniRok()
         {
+            Console.Clear();
             IspisiSveIspitneRokove();
 
             DateTime newPocetak;
@@ -123,6 +125,7 @@ namespace Termin4Primer7.UI
 
         public static void IspisiSveIspitneRokove()
         {
+            Console.Clear();
             foreach (IspitniRok ispitniRok in listaIspitnihRokova)
             {
                 Console.WriteLine("ID:" + ispitniRok.ID + " Naziv:" + ispitniRok.Naziv + " Pocetak:" + ispitniRok.Pocetak.ToString("yyyy/MM/dd") + " Kraj:" + ispitniRok.Kraj.ToString("yyyy/MM/dd"));
@@ -131,6 +134,7 @@ namespace Termin4Primer7.UI
 
         public static void IspisiOdredjeniIspitniRok()
         {
+            Console.Clear();
             Console.Write("Unesite ID:");
             int select = IOPomocnaKlasa.OcitajCeoBroj();
 

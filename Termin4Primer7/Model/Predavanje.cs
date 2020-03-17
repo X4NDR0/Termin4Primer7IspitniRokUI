@@ -23,14 +23,14 @@ namespace Termin4Primer7.Model
             }
         }
 
+        public int ID;
+        public int IDProfesora;
+        public int IDPredmeta;
+
         public string ToFileString()
         {
             string data = IDPredmeta + "," + IDProfesora;
             return data;
         }
-
-        public int ID;
-        public int IDProfesora;
-        public int IDPredmeta;
     }
 }
