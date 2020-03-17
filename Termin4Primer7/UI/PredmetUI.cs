@@ -118,6 +118,7 @@ namespace Termin4Primer7.UI
 
         public static void DodajPredmet()
         {
+            IOPomocnaKlasa.IDPredmeta++;
             Console.Write("Unesite indeks:");
             string addIndeks = IOPomocnaKlasa.OcitajTekst();
 
@@ -126,10 +127,10 @@ namespace Termin4Primer7.UI
 
             Predmet addPredmet = new Predmet { ID = IOPomocnaKlasa.IDPredmeta, Indeks = addIndeks, Naziv = addNaziv };
 
+            listaPredmeta.Add(addPredmet);
+
             string mesto = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(mesto + "data" + "\\" + "predmeti.csv");
-
-            listaPredmeta.Add(addPredmet);
         }
 
         public static void UcitajPodatke(string fileName)

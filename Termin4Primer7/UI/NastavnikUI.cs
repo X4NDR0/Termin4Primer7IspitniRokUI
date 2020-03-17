@@ -59,6 +59,8 @@ namespace Termin4Primer7.UI
 
         public static void DodajProfesora()
         {
+            IOPomocnaKlasa.IDProfesora++;
+
             Console.Write("Unesite ime:");
             string addName = IOPomocnaKlasa.OcitajTekst();
 
@@ -116,7 +118,7 @@ namespace Termin4Primer7.UI
         {
             foreach (Nastavnik nastavnik in listaProfesora)
             {
-                Console.WriteLine(nastavnik.ID + " " + nastavnik.Ime + " " + nastavnik.Prezime + " " + nastavnik.Prezime);
+                Console.WriteLine(nastavnik.ID + " " + nastavnik.Ime + " " + nastavnik.Prezime + " " + nastavnik.Posao);
             }
         }
 

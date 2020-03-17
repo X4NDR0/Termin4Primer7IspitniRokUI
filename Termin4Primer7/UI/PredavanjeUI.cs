@@ -62,6 +62,7 @@ namespace Termin4Primer7.UI
 
         public static void DodajPredavanje()
         {
+            IOPomocnaKlasa.IDPredavanja++;
             PredmetUI.IspisiSvePredmete();
 
             Console.Write("Unesite ID predmeta:");
@@ -88,7 +89,7 @@ namespace Termin4Primer7.UI
                 return;
             }
 
-            Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
+            Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
             listaPredavanja.Add(predajaAdd);
 
