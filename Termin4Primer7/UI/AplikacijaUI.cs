@@ -26,7 +26,7 @@ namespace Termin4Primer7.UI
             IOPomocnaKlasa.IDProfesora = NastavnikUI.listaProfesora.Max(x => x.ID);
 
             PredavanjeUI.UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
-            IOPomocnaKlasa.IDPredavanja = PredavanjeUI.listaPredaja.Count + 1;
+            IOPomocnaKlasa.IDPredavanja = PredavanjeUI.listaPredavanja.Count + 1;
 
             PredmetUI.UcitajPodatke(lokacija + "data" + "\\" + "predmeti.csv");
             IOPomocnaKlasa.IDPredmeta = PredmetUI.listaPredmeta.Max(x => x.ID);

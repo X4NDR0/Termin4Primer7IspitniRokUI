@@ -10,14 +10,14 @@ namespace Termin4Primer7.UI
 {
     class PredavanjeUI
     {
-        public static List<Predavanje> listaPredaja = new List<Predavanje>();
+        public static List<Predavanje> listaPredavanja = new List<Predavanje>();
 
         public static void TekstMenija()
         {
-            Console.WriteLine("1.Dodaj predaju");
-            Console.WriteLine("2.Izmeni predaju");
-            Console.WriteLine("3.Ispisi sve predaje");
-            Console.WriteLine("4.Ispisi odredjenu predaju");
+            Console.WriteLine("1.Dodaj predavanje");
+            Console.WriteLine("2.Izmeni predavanje");
+            Console.WriteLine("3.Ispisi sva predavanja");
+            Console.WriteLine("4.Ispisi odredjeno predavanje");
             Console.WriteLine("0.Nazad");
             Console.Write("Opcija:");
         }
@@ -34,15 +34,15 @@ namespace Termin4Primer7.UI
                 switch (izabir)
                 {
                     case 1:
-                        DodajPredaju();
+                        DodajPredavanje();
                         break;
 
                     case 2:
-                        IzmeniPredaju();
+                        IzmeniPredavanje();
                         break;
 
                     case 3:
-                        IspisiSvePredaje();
+                        IspisiSvaPredavanja();
                         break;
 
                     case 4:
@@ -60,7 +60,7 @@ namespace Termin4Primer7.UI
             } while (izabir != 0);
         }
 
-        public static void DodajPredaju()
+        public static void DodajPredavanje()
         {
             PredmetUI.IspisiSvePredmete();
 
@@ -90,15 +90,15 @@ namespace Termin4Primer7.UI
 
             Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
-            listaPredaja.Add(predajaAdd);
+            listaPredavanja.Add(predajaAdd);
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
         }
 
-        public static void IzmeniPredaju()
+        public static void IzmeniPredavanje()
         {
-            Console.Write("Unesite ID predaje koju zelite da izmenite:");
+            Console.Write("Unesite ID predavanja kojeg zelite da izmenite:");
             int IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
 
             bool provera = ProveriIDPredmeta(IDPredmeta);
@@ -109,30 +109,30 @@ namespace Termin4Primer7.UI
                 return;
             }
 
-            Console.Write("Unesite novi ID predaje:");
+            Console.Write("Unesite novi ID predmeta:");
             int IDPredmetaEdit = IOPomocnaKlasa.OcitajCeoBroj();
 
             Console.Write("Unesite novi ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Predavanje FindObject = listaPredaja.Where(b => b.IDPredmeta == IDPredmeta).FirstOrDefault();
+            Predavanje FindObject = listaPredavanja.Where(b => b.IDPredmeta == IDPredmeta).FirstOrDefault();
 
-            int index = listaPredaja.IndexOf(FindObject);
+            int index = listaPredavanja.IndexOf(FindObject);
 
             Predavanje predajaEdit = new Predavanje { ID = FindObject.ID, IDPredmeta = IDPredmetaEdit, IDProfesora = idProfesora };
 
-            listaPredaja[index] = predajaEdit;
+            listaPredavanja[index] = predajaEdit;
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
         }
 
-        public static void IspisiSvePredaje()
+        public static void IspisiSvaPredavanja()
         {
-            foreach (Predavanje predaja in listaPredaja)
+            foreach (Predavanje predavanje in listaPredavanja)
             {
-                Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predaja.IDProfesora).FirstOrDefault();
-                Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predaja.IDPredmeta).FirstOrDefault();
+                Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predavanje.IDProfesora).FirstOrDefault();
+                Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predavanje.IDPredmeta).FirstOrDefault();
 
                 Console.WriteLine("Ime Profesora:" + FoundNastavnik.Ime + " Prezime profesora:" + FoundNastavnik.Prezime + " Predmet:" + FoundPredmet.Naziv);
             }
@@ -140,19 +140,18 @@ namespace Termin4Primer7.UI
 
         public static void IspisiOdredjenuPredaju()
         {
-            int IDPredaje;
+            int IDPredavanja;
 
-            Console.Write("Unesite ID predaje:");
+            Console.Write("Unesite ID predavanja:");
 
-            IDPredaje = IOPomocnaKlasa.OcitajCeoBroj();
+            IDPredavanja = IOPomocnaKlasa.OcitajCeoBroj();
 
-            foreach (Predavanje predaja in listaPredaja)
+            foreach (Predavanje predaja in listaPredavanja)
             {
-                if (IDPredaje == predaja.ID)
-                    if (IDPredaje == predaja.ID)
-                    {
-                        Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
-                    }
+                if (IDPredavanja == predaja.ID)
+                {
+                    Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
+                }
             }
         }
 
@@ -166,7 +165,7 @@ namespace Termin4Primer7.UI
                 {
                     while ((line = citac.ReadLine()) != null)
                     {
-                        listaPredaja.Add(new Predavanje(line));
+                        listaPredavanja.Add(new Predavanje(line));
                     }
                 }
             }
@@ -182,7 +181,7 @@ namespace Termin4Primer7.UI
             {
                 using (StreamWriter recorder = new StreamWriter(fileName, false, Encoding.UTF8))
                 {
-                    foreach (Predavanje predaja in listaPredaja)
+                    foreach (Predavanje predaja in listaPredavanja)
                     {
                         recorder.WriteLine(predaja.ToFileString());
                     }
