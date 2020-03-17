@@ -59,11 +59,9 @@ namespace Termin4Primer7.UI
 
         public static void DodajIspitniRok()
         {
+            IOPomocnaKlasa.IDispitnogRoka++;
             DateTime addPocetak;
             DateTime addKraj;
-
-            Console.Write("Unesite ID:");
-            int addID = IOPomocnaKlasa.OcitajCeoBroj();
 
             Console.Write("Unesite naziv:");
             string addNaziv = IOPomocnaKlasa.OcitajTekst();
@@ -74,7 +72,7 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite kraj ispitnog roka:");
             addKraj = IOPomocnaKlasa.ProveraVremena();
 
-            IspitniRok addIspitniRok = new IspitniRok { ID = addID, Naziv = addNaziv, Pocetak = addPocetak, Kraj = addKraj };
+            IspitniRok addIspitniRok = new IspitniRok { ID = IOPomocnaKlasa.IDispitnogRoka, Naziv = addNaziv, Pocetak = addPocetak, Kraj = addKraj };
             listaIspitnihRokova.Add(addIspitniRok);
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
@@ -91,11 +89,16 @@ namespace Termin4Primer7.UI
             DateTime newPocetak;
             DateTime newKraj;
 
-            Console.Write("Unesite ID ispitnog roka za izmenu:");
+            Console.Write("Unesite ID za izmenu:");
             int edit = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Console.Write("Unesite novi ID:");
-            int newID = IOPomocnaKlasa.OcitajCeoBroj();
+            bool proveraID = ProveraID(edit);
+
+            if (!proveraID)
+            {
+                Console.WriteLine("Taj ID ne postoji!");
+                return;
+            }
 
             Console.Write("Unesite novi naziv:");
             string newNaziv = IOPomocnaKlasa.OcitajTekst();
@@ -106,16 +109,15 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite novi kraj:(yyyy,MM,dd):");
             newKraj = IOPomocnaKlasa.ProveraVremena();
 
-            IspitniRok izmenaIspitnogRoka = new IspitniRok { ID = newID, Naziv = newNaziv, Pocetak = newPocetak, Kraj = newKraj };
-
             IspitniRok FindIspitniRok = listaIspitnihRokova.Where(x => x.ID == edit).FirstOrDefault();
+
+            IspitniRok izmenaIspitnogRoka = new IspitniRok { ID = FindIspitniRok.ID, Naziv = newNaziv, Pocetak = newPocetak, Kraj = newKraj };
 
             int index = listaIspitnihRokova.IndexOf(FindIspitniRok);
 
             listaIspitnihRokova[index] = izmenaIspitnogRoka;
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
-
             SacuvajIspitneRokoveUDatoteku(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
         }
 
@@ -131,6 +133,14 @@ namespace Termin4Primer7.UI
         {
             Console.Write("Unesite ID:");
             int select = IOPomocnaKlasa.OcitajCeoBroj();
+
+            bool provera = ProveraID(select);
+
+            if (!provera)
+            {
+                Console.WriteLine("Taj ID ne postoji!");
+                return;
+            }
 
             foreach (IspitniRok ispitniRok in listaIspitnihRokova)
             {
@@ -180,5 +190,16 @@ namespace Termin4Primer7.UI
             }
         }
 
+        public static bool ProveraID(int id)
+        {
+            foreach (IspitniRok ispitniRok in listaIspitnihRokova)
+            {
+                if (ispitniRok.ID == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

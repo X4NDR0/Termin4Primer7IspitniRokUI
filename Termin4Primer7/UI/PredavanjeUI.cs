@@ -8,9 +8,9 @@ using Termin4Primer7.Model;
 
 namespace Termin4Primer7.UI
 {
-    class PredajeUI
+    class PredavanjeUI
     {
-        public static List<Predaja> listaPredaja = new List<Predaja>();
+        public static List<Predavanje> listaPredaja = new List<Predavanje>();
 
         public static void TekstMenija()
         {
@@ -24,8 +24,6 @@ namespace Termin4Primer7.UI
 
         public static void MeniPredaja()
         {
-
-
             int izabir;
 
             do
@@ -65,14 +63,15 @@ namespace Termin4Primer7.UI
         public static void DodajPredaju()
         {
             PredmetUI.IspisiSvePredmete();
+
             Console.Write("Unesite ID predmeta:");
             int IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
 
-            bool predmetProvera = ProveriIDPredmeta(IDPredmeta);
+            bool proveraPredmetID = PredmetUI.ProveraID(IDPredmeta);
 
-            if (!predmetProvera)
+            if (!proveraPredmetID)
             {
-                Console.WriteLine("Taj id ne postoji!");
+                Console.WriteLine("Taj ID vec postoji!");
                 return;
             }
 
@@ -81,18 +80,15 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            bool profesorProvera = ProveriIDProfesora(idProfesora);
+            bool proveraProfesorID = NastavnikUI.ProveraID(idProfesora);
 
-            if (!profesorProvera)
+            if (!proveraProfesorID)
             {
-                Console.WriteLine("Taj id ne postoji!");
+                Console.WriteLine("Taj ID vec postoji!");
                 return;
             }
 
-
-            ProveriIDProfesora(idProfesora);
-
-            Predaja predajaAdd = new Predaja { IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
+            Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
             listaPredaja.Add(predajaAdd);
 
@@ -105,17 +101,25 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite ID predaje koju zelite da izmenite:");
             int IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
 
+            bool provera = ProveriIDPredmeta(IDPredmeta);
+
+            if (!provera)
+            {
+                Console.WriteLine("Taj ID ne postoji!");
+                return;
+            }
+
             Console.Write("Unesite novi ID predaje:");
             int IDPredmetaEdit = IOPomocnaKlasa.OcitajCeoBroj();
 
             Console.Write("Unesite novi ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Predaja FindObject = listaPredaja.Where(b => b.IDPredmeta == IDPredmeta).FirstOrDefault();
+            Predavanje FindObject = listaPredaja.Where(b => b.IDPredmeta == IDPredmeta).FirstOrDefault();
 
             int index = listaPredaja.IndexOf(FindObject);
 
-            Predaja predajaEdit = new Predaja { IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
+            Predavanje predajaEdit = new Predavanje { ID = FindObject.ID, IDPredmeta = IDPredmetaEdit, IDProfesora = idProfesora };
 
             listaPredaja[index] = predajaEdit;
 
@@ -125,7 +129,7 @@ namespace Termin4Primer7.UI
 
         public static void IspisiSvePredaje()
         {
-            foreach (Predaja predaja in listaPredaja)
+            foreach (Predavanje predaja in listaPredaja)
             {
                 Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predaja.IDProfesora).FirstOrDefault();
                 Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predaja.IDPredmeta).FirstOrDefault();
@@ -136,18 +140,19 @@ namespace Termin4Primer7.UI
 
         public static void IspisiOdredjenuPredaju()
         {
-            int IDPredmeta;
+            int IDPredaje;
 
             Console.Write("Unesite ID predaje:");
 
-            IDPredmeta = IOPomocnaKlasa.OcitajCeoBroj();
+            IDPredaje = IOPomocnaKlasa.OcitajCeoBroj();
 
-            foreach (Predaja predaja in listaPredaja)
+            foreach (Predavanje predaja in listaPredaja)
             {
-                if (IDPredmeta == predaja.IDPredmeta)
-                {
-                    Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
-                }
+                if (IDPredaje == predaja.ID)
+                    if (IDPredaje == predaja.ID)
+                    {
+                        Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
+                    }
             }
         }
 
@@ -161,7 +166,7 @@ namespace Termin4Primer7.UI
                 {
                     while ((line = citac.ReadLine()) != null)
                     {
-                        listaPredaja.Add(new Predaja(line));
+                        listaPredaja.Add(new Predavanje(line));
                     }
                 }
             }
@@ -177,7 +182,7 @@ namespace Termin4Primer7.UI
             {
                 using (StreamWriter recorder = new StreamWriter(fileName, false, Encoding.UTF8))
                 {
-                    foreach (Predaja predaja in listaPredaja)
+                    foreach (Predavanje predaja in listaPredaja)
                     {
                         recorder.WriteLine(predaja.ToFileString());
                     }
@@ -194,18 +199,6 @@ namespace Termin4Primer7.UI
             foreach (Predmet predmet in PredmetUI.listaPredmeta)
             {
                 if (predmet.ID == idPredmeta)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static bool ProveriIDProfesora(int idProfesora)
-        {
-            foreach (Nastavnik nastavnik in NastavnikUI.listaProfesora)
-            {
-                if (nastavnik.ID == idProfesora)
                 {
                     return true;
                 }

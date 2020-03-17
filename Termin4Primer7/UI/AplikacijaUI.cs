@@ -1,6 +1,7 @@
 ﻿using Modul1Termin04.Primer7.Utils;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Termin4Primer7.UI
 {
@@ -17,12 +18,18 @@ namespace Termin4Primer7.UI
         }
         public void Application()
         {
-            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(),@"..\..\..\"));
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             IspitniRokUI.UcitajIspitneRokoveIzDatoteke(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
-            NastavnikUI.UcitajPodatke(lokacija + "data" + "\\" + "nastavnici.csv");
-            PredajeUI.UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
-            PredmetUI.UcitajPodatke(lokacija + "data" + "\\" + "predmeti.csv");
+            IOPomocnaKlasa.IDispitnogRoka = IspitniRokUI.listaIspitnihRokova.Max(x => x.ID);
 
+            NastavnikUI.UcitajPodatke(lokacija + "data" + "\\" + "nastavnici.csv");
+            IOPomocnaKlasa.IDProfesora = NastavnikUI.listaProfesora.Max(x => x.ID);
+
+            PredavanjeUI.UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
+            IOPomocnaKlasa.IDPredavanja = PredavanjeUI.listaPredaja.Count + 1;
+
+            PredmetUI.UcitajPodatke(lokacija + "data" + "\\" + "predmeti.csv");
+            IOPomocnaKlasa.IDPredmeta = PredmetUI.listaPredmeta.Max(x => x.ID);
 
             int izabir;
 
@@ -46,7 +53,7 @@ namespace Termin4Primer7.UI
                         break;
 
                     case 4:
-                        PredajeUI.MeniPredaja();
+                        PredavanjeUI.MeniPredaja();
                         break;
 
                     case 0:

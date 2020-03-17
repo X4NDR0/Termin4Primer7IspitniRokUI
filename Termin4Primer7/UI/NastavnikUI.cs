@@ -59,9 +59,6 @@ namespace Termin4Primer7.UI
 
         public static void DodajProfesora()
         {
-            Console.Write("Unesite ID:");
-            int addID = IOPomocnaKlasa.OcitajCeoBroj();
-
             Console.Write("Unesite ime:");
             string addName = IOPomocnaKlasa.OcitajTekst();
 
@@ -71,7 +68,7 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite posao:");
             string addPosao = IOPomocnaKlasa.OcitajTekst();
 
-            Nastavnik addNastavnik = new Nastavnik { ID = addID, Ime = addName, Prezime = addLastName, Posao = addPosao };
+            Nastavnik addNastavnik = new Nastavnik { ID = IOPomocnaKlasa.IDProfesora, Ime = addName, Prezime = addLastName, Posao = addPosao };
 
             listaProfesora.Add(addNastavnik);
 
@@ -86,8 +83,13 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite ID profesora kojeg zelite da izmenite:");
             int editID = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Console.Write("Unesite novi ID:");
-            int noviID = IOPomocnaKlasa.OcitajCeoBroj();
+            bool provera = ProveraID(editID);
+
+            if (!provera)
+            {
+                Console.WriteLine("Taj ID ne postoji!");
+                return;
+            }
 
             Console.Write("Unesite novo ime:");
             string novoIme = IOPomocnaKlasa.OcitajTekst();
@@ -98,9 +100,9 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite novi posao:");
             string noviPosao = IOPomocnaKlasa.OcitajTekst();
 
-            Nastavnik editNastavnik = new Nastavnik { ID = noviID, Ime = novoIme, Prezime = novoPrezime, Posao = noviPosao };
-
             Nastavnik checkIndex = listaProfesora.Where(x => x.ID == editID).FirstOrDefault();
+
+            Nastavnik editNastavnik = new Nastavnik { ID = checkIndex.ID, Ime = novoIme, Prezime = novoPrezime, Posao = noviPosao };
 
             int index = listaProfesora.IndexOf(checkIndex);
 
@@ -122,6 +124,14 @@ namespace Termin4Primer7.UI
         {
             Console.WriteLine("Unesite ID profesora kojeg zelite da ispisete:");
             int proveraID = IOPomocnaKlasa.OcitajCeoBroj();
+
+            bool provera = ProveraID(proveraID);
+
+            if (!provera)
+            {
+                Console.WriteLine("Taj ID ne postoji!");
+                return;
+            }
 
             foreach (Nastavnik nastavnik in listaProfesora)
             {
@@ -167,6 +177,18 @@ namespace Termin4Primer7.UI
             {
                 Console.WriteLine("Greska,datoteka ne postoji!!");
             }
+        }
+
+        public static bool ProveraID(int id)
+        {
+            foreach (Nastavnik nastavnik in listaProfesora)
+            {
+                if (nastavnik.ID == id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

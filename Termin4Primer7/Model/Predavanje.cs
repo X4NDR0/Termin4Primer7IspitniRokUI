@@ -2,14 +2,14 @@
 
 namespace Termin4Primer7.Model
 {
-    public class Predaja
+    public class Predavanje
     {
-        public Predaja()
+        public Predavanje()
         {
 
         }
 
-        public Predaja(string podaci)
+        public Predavanje(string podaci)
         {
             string[] nizPodataka = podaci.Split(',');
             if (nizPodataka.Length != 2)
@@ -29,6 +29,7 @@ namespace Termin4Primer7.Model
             return data;
         }
 
+        public int ID;
         public int IDProfesora;
         public int IDPredmeta;
     }

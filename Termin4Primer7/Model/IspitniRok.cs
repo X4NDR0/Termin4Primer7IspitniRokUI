@@ -30,7 +30,7 @@ namespace Modul1Termin04.Primer7.Model
             return podaci;
         }
 
-        public int ID;
+        public int ID { get; set; }
         public string Naziv;
         public DateTime Pocetak;
         public DateTime Kraj;

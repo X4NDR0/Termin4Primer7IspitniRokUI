@@ -68,6 +68,14 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite ID predmeta:");
             int id = IOPomocnaKlasa.OcitajCeoBroj();
 
+            bool provera = ProveraID(id);
+
+            if (!provera)
+            {
+                Console.WriteLine("Taj ID ne postoji!");
+                return;
+            }
+
             foreach (Predmet predmet in listaPredmeta)
             {
                 if (predmet.ID == id)
@@ -82,8 +90,13 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite ID predmeta za izmenu:");
             int izmena = IOPomocnaKlasa.OcitajCeoBroj();
 
-            Console.Write("Unesite ID predmeta:");
-            int editID = IOPomocnaKlasa.OcitajCeoBroj();
+            bool provera = ProveraID(izmena);
+
+            if (!provera)
+            {
+                Console.WriteLine("ID koji ste izabrali ne postoji!");
+                return;
+            }
 
             Console.Write("Unesite indeks:");
             string editIndeks = IOPomocnaKlasa.OcitajTekst();
@@ -91,9 +104,9 @@ namespace Termin4Primer7.UI
             Console.Write("Unesite naziv predmeta:");
             string editNaziv = IOPomocnaKlasa.OcitajTekst();
 
-            Predmet predmet = new Predmet { ID = editID, Indeks = editIndeks, Naziv = editNaziv };
-
             Predmet FindObject = listaPredmeta.Where(x => x.ID == izmena).FirstOrDefault();
+
+            Predmet predmet = new Predmet { ID = FindObject.ID, Indeks = editIndeks, Naziv = editNaziv };
 
             int index = listaPredmeta.IndexOf(FindObject);
 
@@ -105,16 +118,13 @@ namespace Termin4Primer7.UI
 
         public static void DodajPredmet()
         {
-            Console.Write("Unesite ID:");
-            int addID = IOPomocnaKlasa.OcitajCeoBroj();
-
             Console.Write("Unesite indeks:");
             string addIndeks = IOPomocnaKlasa.OcitajTekst();
 
             Console.Write("Unesite naziv predmeta:");
             string addNaziv = IOPomocnaKlasa.OcitajTekst();
 
-            Predmet addPredmet = new Predmet { ID = addID, Indeks = addIndeks, Naziv = addNaziv };
+            Predmet addPredmet = new Predmet { ID = IOPomocnaKlasa.IDPredmeta, Indeks = addIndeks, Naziv = addNaziv };
 
             string mesto = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(mesto + "data" + "\\" + "predmeti.csv");
@@ -160,5 +170,16 @@ namespace Termin4Primer7.UI
             }
         }
 
+        public static bool ProveraID(int id)
+        {
+            foreach (Predmet predmet in listaPredmeta)
+            {
+                if (predmet.ID == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

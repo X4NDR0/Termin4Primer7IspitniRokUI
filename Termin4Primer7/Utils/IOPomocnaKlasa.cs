@@ -124,5 +124,10 @@ namespace Modul1Termin04.Primer7.Utils
             }
             return vreme;
         }
+
+        public static int IDispitnogRoka;
+        public static int IDProfesora;
+        public static int IDPredmeta;
+        public static int IDPredavanja;
     }
 }
