@@ -22,6 +22,8 @@ namespace Termin4Primer7.UI
         }
         public static void MeniProfesora()
         {
+            Console.Clear();
+
             int izabir;
 
             do
@@ -31,23 +33,30 @@ namespace Termin4Primer7.UI
                 switch (izabir)
                 {
                     case 1:
+                        Console.Clear();
                         DodajProfesora();
                         break;
 
                     case 2:
+                        Console.Clear();
                         IzmeniProfesora();
                         break;
 
                     case 3:
+                        Console.Clear();
                         IspisiSveProfesore();
+                        Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni!");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                     case 4:
+                        Console.Clear();
                         IspisiOdredjenogProfesora();
                         break;
 
                     case 0:
-
+                        Console.Clear();
                         break;
 
                     default:
@@ -77,11 +86,21 @@ namespace Termin4Primer7.UI
             string destinacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(destinacija + "data" + "\\" + "nastavnici.csv");
 
+            Console.Clear();
+
             Console.WriteLine("Profesor je uspesno dodat u bazu podataka!");
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+
+            Console.Clear();
+
         }
 
         public static void IzmeniProfesora()
         {
+            IspisiSveProfesore();
+
             Console.Write("Unesite ID profesora kojeg zelite da izmenite:");
             int editID = IOPomocnaKlasa.OcitajCeoBroj();
 
@@ -112,6 +131,14 @@ namespace Termin4Primer7.UI
             SacuvajPodatke(destinacija + "data" + "nastavnici.csv");
 
             listaProfesora[index] = editNastavnik;
+
+            Console.Clear();
+
+            Console.WriteLine("Nastavnik je uspesno izmenjen!");
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadKey();
+
+            Console.Clear();
         }
 
         public static void IspisiSveProfesore()
@@ -124,7 +151,7 @@ namespace Termin4Primer7.UI
 
         public static void IspisiOdredjenogProfesora()
         {
-            Console.WriteLine("Unesite ID profesora kojeg zelite da ispisete:");
+            Console.Write("Unesite ID profesora kojeg zelite da ispisete:");
             int proveraID = IOPomocnaKlasa.OcitajCeoBroj();
 
             bool provera = ProveraID(proveraID);
@@ -142,6 +169,11 @@ namespace Termin4Primer7.UI
                     Console.WriteLine(nastavnik.ID + " " + nastavnik.Ime + " " + nastavnik.Prezime + " " + nastavnik.Prezime);
                 }
             }
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+
+            Console.Clear();
         }
 
         public static void UcitajPodatke(string fileName)

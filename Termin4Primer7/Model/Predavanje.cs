@@ -3,13 +3,22 @@ using System;
 
 namespace Termin4Primer7.Model
 {
+    /// <summary>
+    /// Representing class of the Predavanje
+    /// </summary>
     public class Predavanje
     {
+        /// <summary>
+        /// Empty Constructor of the class
+        /// </summary>
         public Predavanje()
         {
 
         }
 
+        /// <summary>
+        /// Class constructor with parametar(string)
+        /// </summary>
         public Predavanje(string podaci)
         {
             string[] nizPodataka = podaci.Split(',');
@@ -24,11 +33,24 @@ namespace Termin4Primer7.Model
                 IDPredmeta = Convert.ToInt32(nizPodataka[1]);
             }
         }
-
+        /// <summary>
+        /// Property representing ID of the Predavanja
+        /// </summary>
         public int ID;
+
+        /// <summary>
+        /// Property representing ID of the Profesor
+        /// </summary>
         public int IDProfesora;
+
+        /// <summary>
+        /// Property representing ID of the Predmet
+        /// </summary>
         public int IDPredmeta;
 
+        /// <summary>
+        /// Method used to put together IDPredmeta and IDProfesora into a one string
+        /// </summary>
         public string ToFileString()
         {
             string data = IDPredmeta + "," + IDProfesora;

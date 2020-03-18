@@ -23,6 +23,7 @@ namespace Termin4Primer7.UI
         }
         public static void MeniIspitniRok()
         {
+
             int select;
             do
             {
@@ -31,23 +32,30 @@ namespace Termin4Primer7.UI
                 switch (select)
                 {
                     case 1:
+                        Console.Clear();
                         DodajIspitniRok();
                         break;
 
                     case 2:
+                        Console.Clear();
                         IzmeniIspitniRok();
                         break;
 
                     case 3:
+                        Console.Clear();
                         IspisiSveIspitneRokove();
+                        Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                     case 4:
+                        Console.Clear();
                         IspisiOdredjeniIspitniRok();
                         break;
 
                     case 0:
-
+                        Console.Clear();
                         break;
 
                     default:
@@ -80,7 +88,14 @@ namespace Termin4Primer7.UI
 
             SacuvajIspitneRokoveUDatoteku(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
 
+            Console.Clear();
+
             Console.WriteLine("Ispitni rok je uspesno kreiran!");
+
+            Console.WriteLine("Pritiniste bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+
+            Console.Clear();
         }
 
         public static void IzmeniIspitniRok()
@@ -121,6 +136,14 @@ namespace Termin4Primer7.UI
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajIspitneRokoveUDatoteku(lokacija + "data" + "\\" + "ispitni_rokovi.csv");
+
+            Console.Clear();
+
+            Console.WriteLine("Ispitni rok je uspesno izmenjen!");
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void IspisiSveIspitneRokove()
@@ -154,6 +177,9 @@ namespace Termin4Primer7.UI
                 }
             }
 
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void UcitajIspitneRokoveIzDatoteke(string fileName)

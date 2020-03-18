@@ -23,6 +23,8 @@ namespace Termin4Primer7.UI
 
         public static void MenuPredmet()
         {
+            Console.Clear();
+
             int izabir;
 
             do
@@ -32,19 +34,30 @@ namespace Termin4Primer7.UI
                 switch (izabir)
                 {
                     case 1:
+                        Console.Clear();
                         DodajPredmet();
                         break;
 
                     case 2:
+                        Console.Clear();
                         IzmeniPredmet();
                         break;
 
                     case 3:
+                        Console.Clear();
                         IspisiSvePredmete();
+                        Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                     case 4:
+                        Console.Clear();
                         IspisiOdredjeniPredmet();
+                        break;
+
+                    case 0:
+                        Console.Clear();
                         break;
 
                     default:
@@ -83,6 +96,9 @@ namespace Termin4Primer7.UI
                     Console.WriteLine(predmet.ID + " " + predmet.Indeks + " " + predmet.Naziv);
                 }
             }
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void IzmeniPredmet()
@@ -114,6 +130,14 @@ namespace Termin4Primer7.UI
             SacuvajPodatke(mesto + "data" + "\\" + "predmeti.csv");
 
             listaPredmeta[index] = FindObject;
+
+            Console.Clear();
+
+            Console.WriteLine("Predmet je uspesno izmenjen");
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void DodajPredmet()
@@ -131,6 +155,10 @@ namespace Termin4Primer7.UI
 
             string mesto = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(mesto + "data" + "\\" + "predmeti.csv");
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void UcitajPodatke(string fileName)

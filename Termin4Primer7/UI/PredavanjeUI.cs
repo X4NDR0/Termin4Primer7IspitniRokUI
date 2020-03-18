@@ -26,6 +26,8 @@ namespace Termin4Primer7.UI
         {
             int izabir;
 
+            Console.Clear();
+
             do
             {
                 TekstMenija();
@@ -34,22 +36,30 @@ namespace Termin4Primer7.UI
                 switch (izabir)
                 {
                     case 1:
+                        Console.Clear();
                         DodajPredavanje();
                         break;
 
                     case 2:
+                        Console.Clear();
                         IzmeniPredavanje();
                         break;
 
                     case 3:
+                        Console.Clear();
                         IspisiSvaPredavanja();
+                        Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                     case 4:
+                        Console.Clear();
                         IspisiOdredjenoPredavanje();
                         break;
 
                     case 0:
+                        Console.Clear();
                         break;
 
                     default:
@@ -73,6 +83,8 @@ namespace Termin4Primer7.UI
                 return;
             }
 
+            Console.Clear();
+
             NastavnikUI.IspisiSveProfesore();
             Console.Write("Unesite ID profesora:");
             int idProfesora = IOPomocnaKlasa.OcitajCeoBroj();
@@ -85,21 +97,23 @@ namespace Termin4Primer7.UI
                 return;
             }
 
-            //dodato ID = IOPomocnaKlasa.IDPredavanja++ . To znachi, ako je trenutno IdPredavanje = 1, on ce upisati vrednost 1, posle toga ce dici vrednost na 2. Za sledece
-            // predavanje ce taj broj biti 2 itd..
-
             Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
             listaPredavanja.Add(predajaAdd);
-
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
+
+            Console.Clear();
+
+            Console.WriteLine("Predavanje je uspesno dodato!");
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void IzmeniPredavanje()
         {
-            //dodato, IspisiSvaPredavanja , zato sto , kako moze da se izmeni predavanje, ako se ni ne zna ID.
-
             IspisiSvaPredavanja();
 
             Console.Write("Unesite ID predavanja kojeg zelite da izmenite:");
@@ -129,6 +143,14 @@ namespace Termin4Primer7.UI
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
+
+            Console.Clear();
+
+            Console.WriteLine("Predavanje je uspesno izmenjeno");
+
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void IspisiSvaPredavanja()
@@ -137,8 +159,6 @@ namespace Termin4Primer7.UI
             {
                 Nastavnik FoundNastavnik = NastavnikUI.listaProfesora.Where(x => x.ID == predavanje.IDProfesora).FirstOrDefault();
                 Predmet FoundPredmet = PredmetUI.listaPredmeta.Where(x => x.ID == predavanje.IDPredmeta).FirstOrDefault();
-
-                //dodato tekst polje Id predavanja, da bi omogucilo korisniku da vidi id, koji bi trebao da edituje.
 
                 Console.WriteLine("Id Predavanja: " + predavanje.ID + " Ime Profesora:" + FoundNastavnik.Ime + " Prezime profesora:" + FoundNastavnik.Prezime + " Predmet:" + FoundPredmet.Naziv);
             }
@@ -159,6 +179,9 @@ namespace Termin4Primer7.UI
                     Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
                 }
             }
+            Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
+            Console.ReadLine();
+            Console.Clear();
         }
 
 
@@ -198,8 +221,6 @@ namespace Termin4Primer7.UI
                 Console.WriteLine("Greska,datoteka ne postoji!!");
             }
         }
-
-        //dodata metoda ProveriIDPrevanja
 
         public static bool ProveriIDPredavanja(int idPredavanja)
         {

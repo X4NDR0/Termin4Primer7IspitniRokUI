@@ -7,16 +7,13 @@ namespace Modul1Termin04.Primer7.Utils
         public static int IDispitnogRoka;
         public static int IDProfesora;
         public static int IDPredmeta;
-
-        //stavili smo pochetnu vrednost za IDPredavanja, zato sto zelimo da nam id predavanja krece od 1 a ne od 0.
-
         public static int IDPredavanja = 1;
 
         //čitanje promenljive string
         public static string OcitajTekst()
         {
             string tekst = "";
-            while (tekst == null || tekst.Equals("")) //stringovi se mogu porediti i sa preklopljenim operatorom ==
+            while (tekst == null || tekst.Equals(""))
             {
                 tekst = Console.ReadLine();
             }

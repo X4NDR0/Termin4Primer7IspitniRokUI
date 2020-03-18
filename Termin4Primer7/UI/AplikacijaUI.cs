@@ -5,8 +5,14 @@ using System.Linq;
 
 namespace Termin4Primer7.UI
 {
+    /// <summary>
+    /// Class of the Aplikacija UI
+    /// </summary>
     public class AplikacijaUI
     {
+        /// <summary>
+        /// Representing method for writting text for menu
+        /// </summary>
         public void MeniTekst()
         {
             Console.WriteLine("1.Ispitni Rokovi");
@@ -16,6 +22,9 @@ namespace Termin4Primer7.UI
             Console.WriteLine("0.Exit");
             Console.Write("Opcije:");
         }
+        /// <summary>
+        /// This method representing menu
+        /// </summary>
         public void Application()
         {
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
@@ -26,9 +35,6 @@ namespace Termin4Primer7.UI
             IOPomocnaKlasa.IDProfesora = NastavnikUI.listaProfesora.Max(x => x.ID);
 
             PredavanjeUI.UcitajPodatke(lokacija + "data" + "\\" + "predaje.csv");
-            
-            //ne treba vishe
-           // IOPomocnaKlasa.IDPredavanja = PredavanjeUI.listaPredavanja.Count + 1;
 
             PredmetUI.UcitajPodatke(lokacija + "data" + "\\" + "predmeti.csv");
             IOPomocnaKlasa.IDPredmeta = PredmetUI.listaPredmeta.Max(x => x.ID);
@@ -43,18 +49,22 @@ namespace Termin4Primer7.UI
                 switch (izabir)
                 {
                     case 1:
+                        Console.Clear();
                         IspitniRokUI.MeniIspitniRok();
                         break;
 
                     case 2:
+                        Console.Clear();
                         NastavnikUI.MeniProfesora();
                         break;
 
                     case 3:
+                        Console.Clear();
                         PredmetUI.MenuPredmet();
                         break;
 
                     case 4:
+                        Console.Clear();
                         PredavanjeUI.MeniPredaja();
                         break;
 
