@@ -65,7 +65,7 @@ namespace Termin4Primer7.UI
 
                     case 4:
                         Console.Clear();
-                        PredavanjeUI.MeniPredaja();
+                        PredavanjeUI.MeniPredavanja();
                         break;
 
                     case 0:
