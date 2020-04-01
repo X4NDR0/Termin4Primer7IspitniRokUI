@@ -22,7 +22,7 @@ namespace Termin4Primer7.UI
             Console.Write("Opcija:");
         }
 
-        public static void MeniPredaja()
+        public static void MeniPredavanja()
         {
             int izabir;
 
@@ -97,9 +97,9 @@ namespace Termin4Primer7.UI
                 return;
             }
 
-            Predavanje predajaAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
+            Predavanje predavanjeAdd = new Predavanje { ID = IOPomocnaKlasa.IDPredavanja++, IDPredmeta = IDPredmeta, IDProfesora = idProfesora };
 
-            listaPredavanja.Add(predajaAdd);
+            listaPredavanja.Add(predavanjeAdd);
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
 
@@ -137,9 +137,9 @@ namespace Termin4Primer7.UI
 
             int index = listaPredavanja.IndexOf(FindObject);
 
-            Predavanje predajaEdit = new Predavanje { ID = FindObject.ID, IDPredmeta = IDPredmetaEdit, IDProfesora = idProfesora };
+            Predavanje predavanjeEdit = new Predavanje { ID = FindObject.ID, IDPredmeta = IDPredmetaEdit, IDProfesora = idProfesora };
 
-            listaPredavanja[index] = predajaEdit;
+            listaPredavanja[index] = predavanjeEdit;
 
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
             SacuvajPodatke(lokacija + "data" + "\\" + "predaje.csv");
@@ -172,11 +172,11 @@ namespace Termin4Primer7.UI
 
             IDPredavanja = IOPomocnaKlasa.OcitajCeoBroj();
 
-            foreach (Predavanje predaja in listaPredavanja)
+            foreach (Predavanje predavanje in listaPredavanja)
             {
-                if (IDPredavanja == predaja.ID)
+                if (IDPredavanja == predavanje.ID)
                 {
-                    Console.WriteLine("Predaja pod ID-om:" + predaja.IDPredmeta + " predaje profesor pod ID-om:" + predaja.IDProfesora);
+                    Console.WriteLine("Predavanje pod ID-om:" + predavanje.IDPredmeta + " predaje profesor pod ID-om:" + predavanje.IDProfesora);
                 }
             }
             Console.WriteLine("Pritisnite bilo koje dugme da se vratite u meni");
@@ -210,9 +210,9 @@ namespace Termin4Primer7.UI
             {
                 using (StreamWriter recorder = new StreamWriter(fileName, false, Encoding.UTF8))
                 {
-                    foreach (Predavanje predaja in listaPredavanja)
+                    foreach (Predavanje predavanje in listaPredavanja)
                     {
-                        recorder.WriteLine(predaja.ToFileString());
+                        recorder.WriteLine(predavanje.ToFileString());
                     }
                 }
             }
